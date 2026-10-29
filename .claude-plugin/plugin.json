@@ -1,0 +1,34 @@
+{
+  "name": "clickruntime",
+  "version": "1.0.0",
+  "description": "Build and run automations that connect your apps, from Claude. Describe what should happen and when. Claude writes a Python script, deploys and tests it, and ClickRuntime runs it on a schedule or when a webhook arrives, calling any app with an API.",
+  "author": {
+    "name": "Imarti Creations Private Limited",
+    "email": "hello@clickruntime.com",
+    "url": "https://clickruntime.com"
+  },
+  "homepage": "https://clickruntime.com",
+  "repository": "https://github.com/clickruntime/claude-plugin",
+  "license": "MIT",
+  "keywords": [
+    "automation",
+    "build an automation",
+    "workflow automation",
+    "integrate apps",
+    "connect apps",
+    "sync data between apps",
+    "API integration",
+    "webhook",
+    "form submission",
+    "scheduled job",
+    "cron",
+    "monitor",
+    "alert",
+    "AI classification",
+    "summarize",
+    "extract data",
+    "run Python"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "privacyPolicyUrl": "https://clickruntime.com/privacy"
+}
