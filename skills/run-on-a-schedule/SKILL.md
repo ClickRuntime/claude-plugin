@@ -21,7 +21,7 @@ Explicit instructions from the person override this skill. If they ask for somet
 6. If the person changes the cadence in the chat, call `update_draft` with the new `schedule` (the schedule picker saves it itself).
 7. Call `get_setup_status`. If anything is not ready, follow The setup loop in `connect-a-service`: give the person every remaining step in one reply, each with its link, and wait until they say they have finished.
 8. When setup is ready, deploy it: `update_draft` with `deploy: true` (or `save_draft` with `deploy: true` in step 5 when `setup_needs` is empty). If the result says it is still deploying, call `wait_for_deploy`. Say the automation is live only when the result shows the deploy succeeded, and include the next run time, what one run does (for example "this emails you"), and an offer to run a test now. Wait for the answer.
-9. If they say yes: call `run_automation_now`, read the run's status, error and logs, and if it fails, fix and redeploy with `propose_change` and `deploy: true`, then run it again, as in Deploy, test, fix in `get-started`, until a run succeeds. Then report what the test did and any fixes, and call `show_automation` so the person sees it.
+9. If they say yes: call `run_automation_now`, read the run's status, error and logs, and if it fails, fix and redeploy with `change_automation` and `deploy: true`, then run it again, as in Deploy, test, fix in `get-started`, until a run succeeds. Then report what the test did and any fixes, and call `show_automation` so the person sees it.
 
 ## Without cards
 

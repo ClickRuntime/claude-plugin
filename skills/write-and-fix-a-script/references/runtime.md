@@ -62,7 +62,7 @@ Incoming:
 
 - `event` is the parsed JSON body. Form-encoded bodies may be parsed into an object; `raw_body` is always the original.
 - Headers reach the script unredacted so it can verify signatures. They are masked anywhere they are stored or shown.
-- `verified` is set when the automation has signature settings (`signature` on `save_draft`, `update_draft`, or `propose_change`, or the Trigger link section in the ClickRuntime dashboard): provider `stripe`, `github`, `shopify`, `typeform`, `standard_webhooks`, or `hmac_sha256` (with an optional header, encoding, and prefix). With `require` on, failed deliveries never reach the script. Otherwise it is `null`.
+- `verified` is set when the automation has signature settings (`signature` on `save_draft`, `update_draft`, or `change_automation`, or the Trigger link section in the ClickRuntime dashboard): provider `stripe`, `github`, `shopify`, `typeform`, `standard_webhooks`, or `hmac_sha256` (with an optional header, encoding, and prefix). With `require` on, failed deliveries never reach the script. Otherwise it is `null`.
 - Use `event.event_id` for idempotency. The platform also deduplicates on the sender's id header when present.
 - Use only fields the person or a stored event (`get_latest_event`) has shown. Do not invent fields.
 
@@ -180,7 +180,7 @@ Standard library, plus: requests, httpx, pytz, python-dateutil (`dateutil`), bea
 
 ## Extra packages
 
-When the standard library and the packages above cannot do the job, declare the PyPI package in `dependencies` on `save_draft`, `update_draft`, or `propose_change`:
+When the standard library and the packages above cannot do the job, declare the PyPI package in `dependencies` on `save_draft`, `update_draft`, or `change_automation`:
 
 ```json
 "dependencies": [{"name": "tenacity", "version": "==9.0.0"}, {"name": "humanize", "version": "==4.11.0"}]
@@ -238,6 +238,6 @@ def run(event):
 - `failed`: the script raised. The run shows the error, traceback, and logs, redacted.
 - `error`: a platform problem, not the script's fault.
 
-A deploy that fails because of the packages (`dependency_build_failed`, `dependencies_too_large`, `dependency_import_missing`) means the new version does not run. After a change, runs keep using the last version that deployed. When turning on a draft fails this way, nothing has ever deployed, so the automation goes back to a draft with its schedule and trigger link stopped. `get_automation` shows the code and message in `deploy` and `layer.error`; fix `dependencies` (or the import), then deploy again (`propose_change` or, for a draft, `update_draft`, with `deploy: true`).
+A deploy that fails because of the packages (`dependency_build_failed`, `dependencies_too_large`, `dependency_import_missing`) means the new version does not run. After a change, runs keep using the last version that deployed. When turning on a draft fails this way, nothing has ever deployed, so the automation goes back to a draft with its schedule and trigger link stopped. `get_automation` shows the code and message in `deploy` and `layer.error`; fix `dependencies` (or the import), then deploy again (`change_automation` or, for a draft, `update_draft`, with `deploy: true`).
 
 Logs are capped at 4 MB per run, oldest dropped first.

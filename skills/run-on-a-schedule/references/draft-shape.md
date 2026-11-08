@@ -1,6 +1,6 @@
 # Draft shape
 
-Arguments for `save_draft`, `update_draft`, and `propose_change`. The workspace comes from the connection; there is no workspace argument.
+Arguments for `save_draft`, `update_draft`, and `change_automation`. The workspace comes from the connection; there is no workspace argument.
 
 ```json
 {
